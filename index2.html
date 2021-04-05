@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Death by police</title>
+        <link rel="stylesheet" href="./styles.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+        <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+        <script type="text/javascript" src= "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore.js"></script> 
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+    </head>
+
+    <body>
+        <!-- introduction -->
+        <div class="heading">
+            <div class="header"> US Death by Police</div>
+            <div class="subheader"> This dataset is about every fatal shooting in the United States by a police officer in the line of duty since January 1, 2015.
+                A death is not just a statistic figure, it's a life that once lived in this world.
+                The importance of data for people who have died should not be diminished. 
+                <br><br><span style="color: white;">>> Explore more information about killed citizens by hovering over the pixels </span>
+            </div>
+        </div>
+
+        <div class='mapchart'>mapchart</div>
+
+        <!-- Render script -->
+        <script>
+            // Variables
+            const squareSize = 15; // margin of two circles
+            const circleSize = 4.7;
+            const numPerRow = 30;
+            const numPerCol = 34; // show how many rows
+            const w = squareSize * numPerRow; // width of chart
+            const h = squareSize * numPerCol; // height of chart
+            const margin = {
+                top: 5,
+                right: 5,
+                bottom: 5,
+                left: 5,
+            }
+            
+            
+            
+
+            // Create scale
+            const scale = d3.scaleLinear()
+                .domain([0, numPerRow])
+                .range([0, w]);
+
+            var svg = d3.select("body").append('svg')
+                .attr('class', 'chart')
+                .attr('width', w + margin.left + margin.right)
+                .attr('height', h + margin.top + margin.bottom);
+            var chart = svg.append('g')
+                .attr('transform', `translate(${margin.left}, ${margin.top})`);
+            
+            var tooltip = d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+
+            /* 
+                Map chart
+            */
+            
+
+
+
+
+
+
+
+            /* 
+                Grid chart
+            */
+
+            // Render the data
+            function render() {
+            d3.csv("data/death-by-police.csv").then(function (raw_data) {
+                // Filter, shuffle, slice, and sort data
+                let data = raw_data
+                    .filter(d => d.date.substring(0,4) == '2019'); // data in year 2019
+                console.log(data);
+                // let l = data.length;
+                // let countByState = d3.rollup(data, v => v.length, d => d.state, d => d.name); //count of each state
+                // let dataByState = d3.groups(data,d => d.state)                                      // group by state
+                //                     .sort(([_a,a],[_b,b]) => d3.descending(a.length, b.length));    // sort by state count
+                
+                // console.log(dataByState.map(([stateName, stateData]) => stateData[0])); //dataByState.map(([stateName, stateData]) => );
+
+                // Matrix Chart
+
+                chart.selectAll('circle').remove();
+
+                var myColor = d3.scaleSequential()
+                    .interpolator(d3.interpolateInferno)
+                    .domain([1,100]);
+
+                const dots = chart.selectAll('circle')
+                    .data(data)
+                    .enter().append('circle')
+                    .attr('cx', (d, i) => {
+                        const n = i % numPerRow;
+                        return scale(n);
+                    })
+                    .attr('cy', (d, i) => {
+                        const n = Math.floor(i / numPerRow);
+                        return scale(n);
+                    })
+                    .attr('r', circleSize)
+                    .attr('fill','var(--grey1)')
+                    .on("mouseover", handleMouseOver)
+                    .on("mouseout", handleMouseOut);
+                
+                function handleMouseOver(d) {
+                    // highlight rect 
+                    d3.select(this)
+                        .style("fill", 'red')
+                        .style("stroke", "gray")
+                        .style("stroke-width", "1.5px").style("opacity", 1);
+                    // tooltip
+                    tooltip.transition()
+                        .duration(30)
+                    tooltip.html("&ldquo;" + d.state + "&rdquo;" + "<br> <br> <div class='tooltip-footer'> CLICK TO SEE MORE </div>")
+                        .style("left", (d3.event.pageX + 20) + "px")
+                        .style("top", (d3.event.pageY - 20) + "px");
+                    //data for modal
+                    d3.select(this).attr("class", "info").datum(d).style("cursor", "pointer");
+                }
+
+                function handleMouseOut(d) {
+                    // unhighlight color
+                    d3.select(this).style("stroke", "white");
+                    d3.select(this).style("stroke-width", "0px");
+                    d3.select(this).style("fill", "");
+                    // tooltip
+                    tooltip.transition()
+                        .duration(30);
+                    d3.select(this).attr("class", null)
+                }
+                });
+            }
+
+            render();
+        </script>
+
+    </body>
+</html>

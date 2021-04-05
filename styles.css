@@ -3,8 +3,11 @@
   --blue3: #496C99;
   --blue2: #96ABC6;
   --blue1: #BBC9DA;
-  --red2: #FF4E24;
+  --red4: #a32b0d;
+  --red3: #FF4E24;
+  --red2: #da8671;
   --red1: #FFC6B2;
+  --yellow2: #D2963F;
   --yellow1: #D6B13A;
   --grey2: #989898;
   --grey1: #D9D9D9;
@@ -12,9 +15,12 @@
 
 
 body {
-  display: grid;
-  grid-template-rows: 70px 140px 20px auto;
-  grid-template-columns: 150px 500px auto 150px;
+  display: flex;
+  flex-direction: row;
+  /* grid-template-rows: 70px 140px 20px auto 70px;
+  grid-template-columns: 150px 500px auto 150px; */
+  justify-content: center;
+  align-content: center;
   font-family: 'Roboto Mono', monospace;
   background-color: var(--darkblue);
   color: gray;
@@ -31,13 +37,23 @@ body {
   align-self: start;
 }
 
+.info{
+  color: var(--red2);
+  height: 100px;
+}
+
+.pagination{
+  margin: 2rem 0 2rem 0;
+  justify-self: center;
+}
+
 /* head */
 .heading {
-  grid-row: 2;
-  grid-column: 3/4;
+  /* grid-row: 2;
+  grid-column: 3/4; */
   justify-self: center;
   font-size: 30px;
-  margin: 0rem 0 0.3rem 0;
+  margin: 5rem 0 2rem 0;
 }
 .header {
   color: white;
