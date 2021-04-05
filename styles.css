@@ -1,0 +1,52 @@
+:root{
+  --darkblue: #131531;
+  --blue3: #496C99;
+  --blue2: #96ABC6;
+  --blue1: #BBC9DA;
+  --red2: #FF4E24;
+  --red1: #FFC6B2;
+  --yellow1: #D6B13A;
+  --grey2: #989898;
+  --grey1: #D9D9D9;
+}
+
+
+body {
+  display: grid;
+  grid-template-rows: 70px 140px 20px auto;
+  grid-template-columns: 150px 500px auto 150px;
+  font-family: 'Roboto Mono', monospace;
+  background-color: var(--darkblue);
+  color: gray;
+}
+.chart {
+  grid-row: 2;
+  grid-column: 2 / span 1;
+  align-content: center;
+}
+.mapchart{
+  margin-top: 40px;
+  grid-row: 4/5;
+  grid-column: 3/4;
+  align-self: start;
+}
+
+/* head */
+.heading {
+  grid-row: 2;
+  grid-column: 3/4;
+  justify-self: center;
+  font-size: 30px;
+  margin: 0rem 0 0.3rem 0;
+}
+.header {
+  color: white;
+  font-weight: bold;
+  font-size: 26px;
+  align-self: start;
+  margin-bottom: 1rem;
+}
+.subheader {
+  color: rgb(185, 185, 185);
+  font-size: .8rem;
+}
