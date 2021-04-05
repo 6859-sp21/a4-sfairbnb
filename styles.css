@@ -66,3 +66,7 @@ body {
   color: rgb(185, 185, 185);
   font-size: .8rem;
 }
+
+.map-state-highlighted {
+  fill: #FF0000 !important;
+}
