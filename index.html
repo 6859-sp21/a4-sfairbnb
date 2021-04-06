@@ -42,13 +42,13 @@
             </div>
         </div>
 
-        <div class="scroll-demo">
+        <div class="scroll-demo" style="margin-top: 200px;">
             <div style="text-align: left;" >>> Gun Involved </div>
             <div class="GL" style="padding-right: 0px" id="gl" ></div>
-            <div class="Gun" style="padding-right: 0px" id="gun" ></div>
+            <div class="Gun" style="padding-right: 0px" id="gun" ></div><br>
             <div style="text-align: left" >>> Age Distribution</div>
             <div class="AL" style="padding-right: 0px" id="al" ></div>
-            <div class="Age" style="padding-right: 0px" id="age"></div>
+            <div class="Age" style="padding-right: 0px" id="age"></div><br>
             <div style="text-align: left" >>> Flight Mode</div>
             <div class="FL" style="padding-right: 0px" id="fl" ></div>
             <div class="FlightMode" style="padding-right: 0px" id="flight"></div>
@@ -303,7 +303,7 @@
                 //agechart
                 let ageData = raw_data.filter(d => d.date.substring(0,4) == '2019');
                 ageData.map(d => d.age === '' ? d.age ='Unknown': d.age);
-                ageData.sort((a, b) => d3.descending(a.age, b.age)); 
+                ageData.sort((a, b) => d3.ascending(a.age, b.age)); 
 
                 const agesquares = agechart.selectAll('rect')
                 .data(ageData, function (d) { return d.name; })
@@ -391,11 +391,7 @@
                 .attr('ry', 10)
                 .attr('rx', 10)
                 .attr('width', squareSize)
-                .attr('height', squareSize)
-                // .attr("class", (d) => { return d.state; })
-                // .on("mouseover", handleMouseOver)
-                // .on("mouseout", handleMouseOut)
-                // .transition().delay(function (d, i) { return .9 * i; });
+                .attr('height', squareSize);
 
                 var flkeys = d3.set(flightData.map(function(d) { return d.flee; })).values();
                 console.log(flkeys)
@@ -461,8 +457,8 @@
                     d3.selectAll('.unit')
                     .on("click", (d) => {
                         const stateName = fipsToStateCode[d.properties.fips.slice(2)];
-                        d3.selectAll('.'+stateName).style("fill", d => myColor(countByState.get(d.state)));
-
+                        // d3.selectAll('.'+stateName).style("fill", d => myColor(countByState.get(d.state)));
+                        d3.selectAll("rect").style("fill", d => myColor(countByState.get(d.state)));
                         d3.selectAll("rect")
                             .filter(d => d.state !== stateName)
                             .attr('opacity', '30%');
@@ -474,7 +470,7 @@
                     })
                     .on("mouseout", (d) => {
                         const stateName = fipsToStateCode[d.properties.fips.slice(2)];
-                        d3.selectAll('.'+ stateName).style("fill", 'var(--grey1)');
+                        // d3.selectAll('.'+ stateName).style("fill", 'var(--grey1)');
 
                         d3.selectAll("rect")
                             .filter(d => d.state !== stateName)
