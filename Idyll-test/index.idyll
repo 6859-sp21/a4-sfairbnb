@@ -18,12 +18,20 @@ Markdown text
 ## Map
 show map
 
+[data name:"deathbypolice" source:"death-by-police.csv" /]
+
+
+[div]
+[simple data:deathbypolice /]
+[/div]
+
 [var name:"state" value:0 /]
+
 
 [Scroller currentStep:state]
 
   [Graphic className:"d3-component-container"]
-    [CustomD3Component className:"d3-component" state:`state+1` /]
+
   [/Graphic]
 
   [Step]
