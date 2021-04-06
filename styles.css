@@ -78,7 +78,6 @@ body {
 
 .is-active {
   opacity: 100%;
-  fill: var(--red2);
 }
 .is-inactive {
   opacity: 20%;
