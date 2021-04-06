@@ -458,8 +458,8 @@
                     .on("click", (d) => {
                         const stateName = fipsToStateCode[d.properties.fips.slice(2)];
                         // d3.selectAll('.'+stateName).style("fill", d => myColor(countByState.get(d.state)));
-                        d3.selectAll("rect").style("fill", d => myColor(countByState.get(d.state)));
-                        d3.selectAll("rect")
+                        svg.selectAll("rect").style("fill", d => myColor(countByState.get(d.state)));
+                        svg.selectAll("rect")
                             .filter(d => d.state !== stateName)
                             .attr('opacity', '30%');
 
