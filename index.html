@@ -133,8 +133,8 @@
             bottom: 5,
             left: 5,
         }
-        var myColor = d3.scaleSequential()
-        .interpolator(d3.interpolateReds)
+        var myColor = d3.scaleSequential()  
+        .interpolator(d3.interpolateReds) // color
         .domain([-20,150]);
 
         var Ordinalcolor = d3.scaleOrdinal(d3.schemeCategory10);
@@ -463,6 +463,10 @@
                         const stateName = fipsToStateCode[d.properties.fips.slice(2)];
                         d3.selectAll('.'+stateName).style("fill", d => myColor(countByState.get(d.state)));
 
+                        d3.selectAll("rect")
+                            .filter(d => d.state !== stateName)
+                            .attr('opacity', '30%');
+
                         tooltipState.transition()
                             .duration(30)
                             .style("opacity", 1)
@@ -471,6 +475,10 @@
                     .on("mouseout", (d) => {
                         const stateName = fipsToStateCode[d.properties.fips.slice(2)];
                         d3.selectAll('.'+ stateName).style("fill", 'var(--grey1)');
+
+                        d3.selectAll("rect")
+                            .filter(d => d.state !== stateName)
+                            .attr('opacity', '100%');
 
                         tooltipState.transition()
                             .duration(30)
