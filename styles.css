@@ -20,7 +20,7 @@ body {
   justify-content: center;
   align-content: center;
   font-family: 'Roboto Mono', monospace;
-  background-color: var(--darkblue);
+  background-color: var(--darkblue) !important;
   color: var(--grey2);
   font-size: .8rem;
 }
