@@ -220,7 +220,8 @@
                     .filter(d => d.date.substring(0,4) == '2019'); // data in year 2019
 
                 let countByState = d3.rollup(data, v => v.length, d => d.state); //count of each state
-                data.sort((a, b) => d3.descending(countByState.get(a.state), countByState.get(b.state))); // sort by count
+                data.sort((a, b) => d3.descending(countByState.get(a.state), countByState.get(b.state)) == 0
+                ? d3.descending(a.state,b.state):d3.descending(countByState.get(a.state), countByState.get(b.state))); // sort by count
 
                 data.map(d => d.age === '' ? d.age ='Unknown': d.age);
                 data.map(d => d.gender === 'F' ? d.gender ='Female': d.gender ='Male');
@@ -468,7 +469,8 @@
                         tooltipState.transition()
                             .duration(30)
                             .style("opacity", 1)
-                        tooltipState.html("<br><br>State: " + stateName + "<br>Deaths: " + countByState.get(stateName));
+                        tooltipState.html("<br><br>State: " + stateName + "<br>Deaths: " + countByState.get(stateName))
+                                    .style("color", myColor(countByState.get(stateName)));
                     })
                     .on("mouseout", (d) => {
                         const stateName = fipsToStateCode[d.properties.fips.slice(2)];
