@@ -66,9 +66,17 @@ body {
 }
 
 .map-state-highlighted {
-  /* fill: #FF0000 !important; */
   opacity: 40%;
 }
+
+/* slider */
+
+#year-filter::-webkit-slider-thumb {
+  background: var(--grey2) ;
+} 
+#year-filter::-moz-range-thumb {
+  background: var(--grey2) ;
+} 
 
 /* scroller*/
 #sections {
