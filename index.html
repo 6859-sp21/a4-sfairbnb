@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 
 <head>
     <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -71,15 +71,19 @@
             <!-- two charts -->
             <div class="grid">
                 <div class="info">
-                    <div class="tooltip"></div>
+                    <div class="tooltip" style = "margin-left: 8%"></div>
                     <div class="tooltipState" style="margin-left: 68%"></div>
                 </div>
+
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-sm-5" style="padding-left: 0px" id="grids"></div>
-                        <div class="col-sm-7 d3-geomap" style="padding-right: 0px; text-align: center;" id="mappppp">
+                        <div class="col-sm-5" style="padding-left: 0px" id="grids">
                             <div><< Hover the dot to discover personal information</div>
+                            </br>
+                        </div>
+                        <div class="col-sm-7 d3-geomap" style="padding-right: 0px; text-align: center;" id="mappppp">
                             <div>>> Click the state to view more information</div>
+                            </br>
                         </div>
                     </div>
                 </div>
@@ -469,7 +473,8 @@
                     tooltip.transition()
                     .duration(30)
                     .style("opacity", 1)
-                    tooltip.html("Age: " + d.age + "<br>Gender: " + d.gender + "<br>Location: " + d.city + ", "+ d.state + "<br>Flee: " + d.flee);
+                    tooltip.html("Age: " + d.age + "<br>Gender: " + d.gender + "<br>Location: " + d.city + ", "+ d.state + "<br>Flee: " + d.flee)
+                    .style("color", myColor(countByState.get(d.state)));
 
                     d3.select('.unit-US' + stateCodeToFips[d.state]).classed("map-state-highlighted", true);
                 }
