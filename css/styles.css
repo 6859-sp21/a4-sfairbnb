@@ -66,7 +66,7 @@ body {
 } 
 
 /* scroller*/
-/* #sections {
+ #sections {
 position: relative;
 display: inline-block;
 width: 250px;
@@ -75,19 +75,19 @@ z-index: 90;
 }
 
 .step {
-margin-bottom: 200px;
+margin-top: 200px;
 }
 
 #vis {
 display: inline-block;
 position: sticky;
-top : 200px;
+top : 400px;
 z-index: 1;
 margin-left: 500px;
 right: 100px;
-background: white;
+/*background: white;*/
 opacity: 40%
-} */
+} 
 
 h2 {
   font-family: 'Roboto', sans-serif !important;
