@@ -267,7 +267,7 @@
                     const n = Math.floor(i / numPerRow);
                     return scale(n);
                 })
-                .attr('fill', 'var(--grey1)')//d => myColor(countByState.get(d.state))
+                .attr('fill', d => myColor(countByState.get(d.state)))//d => myColor(countByState.get(d.state))
                 .attr('ry', 10)
                 .attr('rx', 10)
                 .attr('width', squareSize)
