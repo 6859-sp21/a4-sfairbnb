@@ -25,10 +25,8 @@
         .interpolator(d3.interpolateReds) // color
         .domain([-20,150]);
 
-  var Ordinalcolor = d3.scaleOrdinal(d3.schemeCategory10);
-
-  var Fourcolor = d3.scaleOrdinal(d3.schemeCategory10)
-                      .domain(["unknown", "40","20","0"]) ;
+  var Ordinalcolor = d3.scaleOrdinal(d3.schemeTableau10)
+                      .domain(d3.range(0,10)) ;
 
   // Keep track of which visualization
   // we are on and which was the last
@@ -100,7 +98,7 @@
           const n = Math.floor(i / numPerRow);
           return scale(n);
       })
-      .attr('fill', d => d.armed == 'gun' ? Fourcolor("0") : 'var(--grey1)')
+      .attr('fill', d => d.armed == 'gun' ? Ordinalcolor(2) : 'var(--grey1)')
       .attr('ry', 10)
       .attr('rx', 10)
       .attr('width', squareSize)
@@ -124,10 +122,10 @@
           return scale(n);
       })
       .attr('fill', function (d) {
-          if (d.age == 'Unknown') {return Fourcolor("unknown"); }
-          else if  (d.age > 40) {return Fourcolor("40");}
-          else if (d.age >20)  {return Fourcolor("20");}
-          else {return Fourcolor("0");}   
+          if (d.age == 'Unknown') {return Ordinalcolor(9); }
+          else if  (d.age > 40) {return Ordinalcolor(1);}
+          else if (d.age >20)  {return  Ordinalcolor(0);}
+          else {return Ordinalcolor(2);}   
       })
       .attr('ry', 10)
       .attr('rx', 10)
@@ -152,7 +150,12 @@
           const n = Math.floor(i / numPerRow);
           return scale(n);
       })
-      .attr('fill',function (d) { return Ordinalcolor(d.flee);} )
+      .attr('fill',function (d) { 
+          if (d.flee == 'Unknown') {return Ordinalcolor(9); }
+          else if  (d.flee == 'Foot') {return Ordinalcolor(1);}
+          else if (d.flee == 'Car')  {return  Ordinalcolor(0);}
+          else {return Ordinalcolor(2);}    
+      } )
       .attr('ry', 10)
       .attr('rx', 10)
       .attr('width', squareSize)
@@ -272,7 +275,7 @@
           const n = Math.floor(i / numPerRow);
           return scale(n);
       })
-      .attr('fill', d => d.armed == 'gun' ? Fourcolor("0") : 'var(--grey1)')
+      .attr('fill', d => d.armed == 'gun' ? Ordinalcolor(2): 'var(--grey1)')
       .attr('ry', 10)
       .attr('rx', 10)
       .attr('width', squareSize)
@@ -317,10 +320,10 @@
           return scale(n);
       })
       .attr('fill', function (d) {
-          if (d.age == 'Unknown') {return Fourcolor("unknown"); }
-          else if  (d.age > 40) {return Fourcolor("40");}
-          else if (d.age >20)  {return Fourcolor("20");}
-          else {return Fourcolor("0");}   
+          if (d.age == 'Unknown') {return Ordinalcolor(9); }
+          else if  (d.age > 40) {return Ordinalcolor(1);}
+          else if (d.age >20)  {return  Ordinalcolor(0);}
+          else {return Ordinalcolor(2);}   
       })
       .attr('ry', 10)
       .attr('rx', 10)
@@ -364,7 +367,12 @@
           const n = Math.floor(i / numPerRow);
           return scale(n);
       })
-      .attr('fill',function (d) { return Ordinalcolor(d.flee);} )
+      .attr('fill',function (d) { 
+          if (d.flee == 'Unknown') {return Ordinalcolor(9); }
+          else if  (d.flee == 'Foot') {return Ordinalcolor(1);}
+          else if (d.flee == 'Car')  {return  Ordinalcolor(0);}
+          else {return Ordinalcolor(2);}    
+         })
       .attr('ry', 10)
       .attr('rx', 10)
       .attr('width', squareSize)
@@ -424,14 +432,9 @@
         left: 5,
   }
   // color 
-  var myColor = d3.scaleSequential()  
-        .interpolator(d3.interpolateReds) // color
-        .domain([-20,150]);
 
-  var Ordinalcolor = d3.scaleOrdinal(d3.schemeCategory10);
-
-  var Fourcolor = d3.scaleOrdinal(d3.schemeCategory10)
-                      .domain(["unknown", "40","20","0"]) ;
+  var Ordinalcolor = d3.scaleOrdinal(d3.schemeTableau10)
+                      .domain(d3.range(0,10)) ;
 
   // Keep track of which visualization
   // we are on and which was the last
@@ -534,7 +537,7 @@
     .attr("cx", function(d,i){ return 30 + i*150})
     .attr("cy", 25) // 100 is where the first dot appears. 25 is the distance between dots
     .attr("r", 5)
-    .style("fill", function(d){ return d === 'Gun Involved' ? Fourcolor("0") : 'var(--grey1)';});
+    .style("fill", function(d){ return d === 'Gun Involved' ? Ordinalcolor(2) : 'var(--grey1)';});
 
     svg.selectAll("text").remove();  
     svg.selectAll("mylabels")
@@ -543,7 +546,7 @@
       .append("text")
         .attr("x", function(d,i){ return 50 + i*150})
         .attr("y", 25)
-        .style("fill", function(d){ return d === 'Gun Involved' ? Fourcolor("0") : 'var(--grey1)';})
+        .style("fill", function(d){ return d === 'Gun Involved' ? Ordinalcolor(2): 'var(--grey1)';})
         .text(function(d){ return d})
         .attr("text-anchor", "left")
         .style("alignment-baseline", "middle")
@@ -564,10 +567,10 @@
       .attr("cy", 25) // 100 is where the first dot appears. 25 is the distance between dots
       .attr("r", 5)
       .style("fill", function (d) {
-      if (d == 'Unknown') {return Fourcolor("unknown"); }
-      else if  (d == '>40') {return Fourcolor("40");}
-      else if (d == '20-40')  {return Fourcolor("20");}
-      else {return Fourcolor("0");}   
+          if (d == 'Unknown') {return Ordinalcolor(9); }
+          else if  (d == '>40') {return Ordinalcolor(1);}
+          else if (d == '20-40')  {return  Ordinalcolor(0);}
+          else {return Ordinalcolor(2);}    
   });
 
     svg.selectAll("text").remove();  
@@ -578,10 +581,10 @@
           .attr("x", function(d,i){ return 20 + i*100})
           .attr("y", 25)
           .style("fill", function (d) {
-              if (d == 'Unknown') {return Fourcolor("unknown"); }
-              else if  (d == '>40') {return Fourcolor("40");}
-              else if (d == '20-40')  {return Fourcolor("20");}
-              else {return Fourcolor("0");}
+            if (d == 'Unknown') {return Ordinalcolor(9); }
+            else if  (d == '>40') {return Ordinalcolor(1);}
+            else if (d == '20-40')  {return  Ordinalcolor(0);}
+            else {return Ordinalcolor(2);}    
               })  
           .text(function(d){ return d})
           .attr("text-anchor", "left")
@@ -603,7 +606,12 @@
         .attr("cx", function(d,i){ return 10 + i*100})
         .attr("cy", 25) // 100 is where the first dot appears. 25 is the distance between dots
         .attr("r", 5)
-        .style("fill", function (d) {return Ordinalcolor(d);}   
+        .style("fill", function (d) {
+          if (d == 'Unknown') {return Ordinalcolor(9); }
+          else if  (d == 'Foot') {return Ordinalcolor(1);}
+          else if (d == 'Car')  {return  Ordinalcolor(0);}
+          else {return Ordinalcolor(2);}  
+        }   
     );
 
     svg.selectAll("text").remove();  
@@ -613,7 +621,11 @@
           .append("text")
             .attr("x", function(d,i){ return 20 + i*100})
             .attr("y", 25)
-            .style("fill", function (d) {return Ordinalcolor(d)})  
+            .style("fill", function (d) {          
+              if (d == 'Unknown') {return Ordinalcolor(9); }
+              else if  (d == 'Foot') {return Ordinalcolor(1);}
+              else if (d == 'Car')  {return  Ordinalcolor(0);}
+              else {return Ordinalcolor(2);}  })  
             .text(function(d){ 
                 if (d == 'Not fleeing') {return "Not fleeing"; }
                 else if  (d == 'Unknown') {return "Unknown";}
@@ -667,10 +679,14 @@
 function display(data) {
   //create data 
   var year = document.getElementById("year-filter").value;
+  var counts = d3.count(data.filter(d=>d.date.substring(0,4) == year), d=>d.id);
+  document.getElementById("S_Number").innerHTML = counts;
+  
   // console.log(year);
   var gunData = getGun(data);
   var ageData = getAge(data);
   var flightData = getFlight(data);
+  
   // create a new plot and
   // display it
   d3.select('#scrollsvg').remove();
