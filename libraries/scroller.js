@@ -7,7 +7,7 @@
  *
  */
 function scroller() {
-  var container = d3.select('body');
+  var container = d3.select('#graphic');
   // event dispatcher
   var dispatch = d3.dispatch('active', 'progress');
 
@@ -81,7 +81,7 @@ function scroller() {
 
       sectionPositions.push(top - startPos);
     });
-    containerStart = container.node().getBoundingClientRect().top + window.pageYOffset;
+    containerStart = container.node().getBoundingClientRect().top + window.pageYOffset+200;
   }
 
   /**
@@ -92,7 +92,7 @@ function scroller() {
    *
    */
   function position() {
-    var pos = window.pageYOffset - 10 - containerStart ;
+    var pos = window.pageYOffset -10 - containerStart ;
     var sectionIndex = d3.bisect(sectionPositions, pos);
     sectionIndex = Math.min(sections.size() - 1, sectionIndex);
 
