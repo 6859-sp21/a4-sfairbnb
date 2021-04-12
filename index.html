@@ -32,7 +32,7 @@
         <ul>
             <li><a href="#section1" data-number="1"><span class="cd-dot"></span><span class="cd-label">Home</span></a></li>
             <li><a href="#section2" data-number="2"><span class="cd-dot"></span><span class="cd-label">Grid Map</span></a></li>
-            <li><a href="#section3" data-number="3"><span class="cd-dot"></span><span class="cd-label">Details</span></a></li>
+            <li><a href="#section3" data-number="3"><span class="cd-dot"></span><span class="cd-label">Analysis</span></a></li>
         </ul>
     </nav>
 
@@ -44,8 +44,7 @@
             <h2>US FATAL SHOOTING</h2>
             <h2 class="cursive">BY POLICE</h2><br>
             <div style="padding-right: 60vw;" data-aos="fade-in">
-                <p style="text-align: left;font-size: 17px;">"When you shoot, you shoot to kill. Using your gun is the last resort."</p>
-                <!-- <em><br><br>- A police officer</em> -->
+                <p style="text-align: left;font-size: 17px;">"When you shoot, you shoot to kill. Using your gun is the last resort."<em><br><br>- A police officer</em></p>
             </div>
         </div>
     </div>
@@ -95,24 +94,7 @@
             </div>
         </div>
     </section>
-    <section id="section00">
-        <div class="container">
-            <div class="line"></div>
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="small">
-                        Data Sources:
-                        <br>Police Shootings Dataset: <a href = "https://www.kaggle.com/mrmorj/data-police-shootings">DS Dataset</a>
-                        <br>Police Violence & Racial Equity Dataset: <a href = "https://www.kaggle.com/jpmiller/police-violence-in-the-us">RV&RE Dataset</a>
-                        <br>Video: <a href = "https://www.youtube.com/watch?v=1ttZ7L2pWNo">A4 Video</a>
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <p class="small" style="text-align: right;"><b >MIT 6.859 : Data Visualization</b><br>by Rui Wang, <br>Jiahui Tang, <br>and Zilin Zou</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- Details -->
     <section id="section3" class="cd-section nav-section">
@@ -128,7 +110,7 @@
                 <div class="FL" style="padding-right: 0px" id="fl" ></div>
                 <div class="FlightMode" style="padding-right: 0px" id="flight"></div>
             </div> -->
-            <div id="storyTitle">Here is the beginning of the story >> </div>
+            <div id="storyTitle">Here is the beginning of the analysis >> </div>
 
         	<div id='graphic'>
                 <div id='vislegend'>
@@ -158,6 +140,25 @@
     	</div>
     </section>
 
+    <section id="section00">
+        <div class="container">
+            <div class="line"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="small">
+                        Data Sources:
+                        <br>Police Shootings Dataset: <a href = "https://www.kaggle.com/mrmorj/data-police-shootings">DS Dataset</a>
+                        <br>Police Violence & Racial Equity Dataset: <a href = "https://www.kaggle.com/jpmiller/police-violence-in-the-us">RV&RE Dataset</a>
+                        <br>Video: <a href = "https://www.youtube.com/watch?v=1ttZ7L2pWNo">A4 Video</a>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p class="small" style="text-align: right;"><b >MIT 6.859 : Data Visualization</b><br>by Rui Wang, <br>Jiahui Tang, <br>and Zilin Zou</p>
+                </div>
+            </div>
+        </div>
+        <div id="extra-space"></div>
+    </section>
 
     <!-- Render script -->
     <script>
@@ -549,29 +550,36 @@
                         else
                         {arrayOfSelected.splice(i,i);};
                     };
-                    console.log(arrayOfSelected);
+                    // console.log(arrayOfSelected);
 
                     svg.selectAll("rect")
                         .style("fill", d => myColor(countByState.get(d.state)));
 
-                    if (!arrayOfSelected.length) //empty array
-                    {
-                        svg.selectAll("rect").attr('opacity', '100%');
-                        d3.selectAll('.unit').attr('opacity', '100%');
-                    }else{
-                        svg.selectAll("rect")
-                        .filter(d => arrayOfSelected.includes(d.state))
-                        .attr('opacity', '100%')
-                        .attr('fill', d => myColor(countByState.get(d.state)));
+                    // if (!arrayOfSelected.length) //empty array
+                    // {
+                    //     svg.selectAll("rect").attr('opacity', '100%');
+                    //     d3.selectAll('.unit').attr('opacity', '100%');
+                    // }else{
+                    //     svg.selectAll("rect")
+                    //     .filter(d => arrayOfSelected.includes(d.state))
+                    //     .attr('opacity', '100%')
+                    //     .attr('fill', d => myColor(countByState.get(d.state)));
 
-                        svg.selectAll("rect")
-                        .filter(d => !arrayOfSelected.includes(d.state))
+                    //     svg.selectAll("rect")
+                    //     .filter(d => !arrayOfSelected.includes(d.state))
+                    //     .attr('opacity', '30%')
+                    //     .attr('fill', d => myColor(countByState.get(d.state)));
+
+                    //     d3.selectAll('.unit').filter(d2 => {arrayOfSelected.includes(fipsToStateCode[d2.properties.fips.slice(2)])}).attr('opacity', '100%');
+                    //     d3.selectAll('.unit').filter(d2 => !arrayOfSelected.includes(fipsToStateCode[d2.properties.fips.slice(2)])).attr('opacity', '30%'); //d !== d2
+                    // };
+
+
+                    svg.selectAll("rect")
+                        .filter(d => d.state !== stateName)
                         .attr('opacity', '30%')
                         .attr('fill', d => myColor(countByState.get(d.state)));
-
-                        d3.selectAll('.unit').filter((d2) => arrayOfSelected.includes(d2)).attr('opacity', '100%');
-                        d3.selectAll('.unit').filter((d2) => !arrayOfSelected.includes(d2)).attr('opacity', '30%'); //d !== d2
-                    };
+                    d3.selectAll('.unit').filter(d2 => d !== d2).attr('opacity', '100%');
 
                     tooltipState.transition()
                         .duration(30)
@@ -602,14 +610,14 @@
                             return myColor(countByState.get(fipsToStateCode[d.properties.fips.slice(2)]));
                         })
                         .on("click", (d) => {
-                            // if (stateSelected) {
-                            //     unselectState(d);
-                            // } else {
-                            //     selectState(d);
-                            // }
-                            selectState(d);
+                            if (stateSelected) {
+                                unselectState(d);
+                            } else {
+                                selectState(d);
+                            }
+                            // selectState(d);
                         })
-                        // .on("mouseout", unselectState);
+                        .on("mouseout", unselectState);
                     })
                     .draw(d3.select('#mappppp').datum(mapData)); 
                 });

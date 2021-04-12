@@ -551,7 +551,7 @@
 
 
   function showAge() {
-    var alkeys = ["Unknown",">40" ,"20-40",'<20'];
+    var alkeys = ['<20',"20-40",">40","Unknown"];
 
     svg.selectAll("circle").remove();
     svg.selectAll("mydots")
