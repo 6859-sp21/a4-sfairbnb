@@ -11,14 +11,14 @@ The dataset contains the basic biodata and shooting-related information of fatal
 
 We have made multiple design choices based on the data. The dark color palette we used in the background and charts conveys a sense of seriousness. To show the respect of life, we create an interaction on the left chart: if you hover over the dot, you will see the color changes to red and there will be non-private information about the person on the top. So the person who passed away is not only a dot anymore. Also, we find a great variance in the number of deaths by State when doing data analysis, so we create a map and use different shades of red colors to show how many deaths in each state. An interaction between the dot plot and the map is made as well so the viewer can see the fraction of each state on the left side. Indeed, California, Texas, and Florida together account for about 1/3 of the total police shootings.
 
-Furthermore, we discover some meaningful perspectives about the data. For example, we find that the majority of the people who killed by police are armed with a gun, and young age people constitute about half of the deaths. The most interesting thing is many people are not fleeing when they are killed. In this situation, do the police officers really need to kill them? We want to present this information in a scroll-telling way that has not finished yet. The basic idea is to tell our story when scrolling pages, and the chart is changing in this fixed position.
+Furthermore, we discover some meaningful perspectives about the data. For example, we find that the majority of the people who were killed by the police are armed with a gun. The Small Arms Survey states that U.S. civilians alone account for 393 million (about 46 percent) of the worldwide total of civilian held firearms. The high rate of gun ownership in U.S. yields great potential problems like gun violence. This not only threatens our life but also makes policing be a really tough job. In addition, we see that the young age people constitute about half of the deaths.  It is disappointing to see so many teenagers were killed in fatal by the police. More actions and educations have to be made in order to avoid these tragedies. The most interesting thing is many people are not fleeing when they are killed. In this situation, do the police officers really need to kill them? We analyze the data and present this information in a scroll-telling way, so that the readers have a better understanding of the current situation of the police shootings.
 
 # Development Process Overview
 
 The main responsibility is divided as following, but everyone is responsible for crossing checking and updating each other's section when there are cross-references and interactions between different sections.
 * Jiahui Tang: Geomap and Interaction between Dots, Map, Sliding Bar
 * Rui Wang: UI/UX Design, Matrix Chart, Sliding Bar, Navigation Dots, Cover Page, Footnote
-* Silin Zou: Scrolling Analysis and EDA charts
+* Silin Zou: Scrolling Analysis, EDA charts, and Interaction between EDA and Sliding Bar
 
 Roughly we spent around 60 hours in total developing our application.
 In terms of implementation, the scrolling function and updating of all graphs with a sliding bar took the most of time. 
