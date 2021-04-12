@@ -24,3 +24,9 @@ Roughly we spent around 60 hours in total developing our application.
 In terms of implementation, the scrolling function and updating of all graphs with a sliding bar took the most of time. 
 The interaction functionalities with event listeners and updating graphs with each mouse behavior event also take time. 
 In terms of other aspects, interaction design is the most time-consuming part.
+
+# Acknowledgement
+
+Scrollytelling: 
+https://vallandingham.me/scroller.html
+https://medium.com/@bryony_17728/titanic-d3-scrolling-story-eaed1b6f5766
