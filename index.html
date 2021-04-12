@@ -72,24 +72,43 @@
             <!-- two charts -->
             <div class="grid">
                 <div class="info">
-                    <div class="tooltippp" style = "margin-left: 8%; position:absolute"></div>
+                    <div class="tooltippp" style = "margin-left: 1%; position:absolute"></div>
                     <div class="tooltipState" style="margin-left: 68%"></div>
                 </div>
 
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-5" style="padding-left: 0px" id="grids">
-                            <div><< Hover the dot to discover personal information</div>
+                            <div>>> Hover a dot to discover personal information</div>
                             <br/>
                         </div>
                         <div class="col-sm-7 d3-geomap" style="padding-right: 0px; text-align: center;" id="mappppp">
                             <div>>> Click the state to view more information</div>
-                            <br/>
+                            <div class="row justify-content-center" style="margin-bottom: -18px;"> 
+                                <svg id="legendddd"></svg>
+                            </div>
+                            
                         </div>
                     </div>
-                    <div class="row justify-content-center" style="margin-top: 15px"> 
-                        <svg id="legendddd"></svg>
-                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="section00">
+        <div class="container">
+            <div class="line"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="small">
+                        Data Sources:
+                        <br>Police Shootings Dataset: <a href = "https://www.kaggle.com/mrmorj/data-police-shootings">DS Dataset</a>
+                        <br>Police Violence & Racial Equity Dataset: <a href = "https://www.kaggle.com/jpmiller/police-violence-in-the-us">RV&RE Dataset</a>
+                        <br>Video: <a href = "https://www.youtube.com/watch?v=1ttZ7L2pWNo">A4 Video</a>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p class="small" style="text-align: right;"><b >MIT 6.859 : Data Visualization</b><br>by Rui Wang, <br>Jiahui Tang, <br>and Zilin Zou</p>
                 </div>
             </div>
         </div>
@@ -172,9 +191,9 @@
 
         var myColor = d3.scaleSequential()
         .interpolator(d3.interpolateReds) // color
-        .domain([0, 150]);
+        .domain([0, 200]);
 
-        legend({color: myColor, title: "Number of Killed Citizens", width: 640, svgIn: d3.select('#legendddd')});
+        legend({color: myColor, width: 330, svgIn: d3.select('#legendddd')});// title: "Number of Killed Citizens",
 
         var Ordinalcolor = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -208,7 +227,7 @@
         .height(h + margin.top + margin.bottom)
         .column('count')
         .unitId('fips')
-        .scale(900)
+        .scale(800)
         .legend(false);
 
         // // Create the gunsvg
@@ -280,7 +299,7 @@
                     const n = Math.floor(i / numPerRow);
                     return scale(n);
                 })
-                .attr('fill', d => myColor(countByState.get(d.state)))
+                .attr('fill', 'var(--grey1)')//d => myColor(countByState.get(d.state))
                 .attr('ry', 10)
                 .attr('rx', 10)
                 .attr('width', squareSize)
@@ -478,7 +497,7 @@
 
                 function handleMouseOver(d) {
                     // highlight rect 
-                    d3.select(this).style("fill", 'var(--grey1)');
+                    d3.select(this).attr('opacity', '40%');
                     tooltip.transition()
                     .duration(30)
                     .style("opacity", 1)
@@ -490,7 +509,7 @@
 
                 function handleMouseOut(d) {
                     // unhighlight color
-                    d3.select(this).style("fill", d => myColor(countByState.get(d.state)));
+                    d3.select(this).attr('opacity', '100%');
                     tooltip.transition()
                     .duration(30)
                     .style("opacity", 0);
@@ -505,20 +524,47 @@
                 d3.select('#mappppp>svg').remove();
 
                 let stateSelected = false;
+                let arrayOfSelected = []; // an array containing all selected states
 
                 function selectState(d) {
                     stateSelected = true;
 
                     const stateName = fipsToStateCode[d.properties.fips.slice(2)];
 
+                    if (!arrayOfSelected.includes(stateName)){ 
+                        //add state into array
+                        arrayOfSelected.push(stateName);
+                    }else{
+                        //remove state from array
+                        let i = arrayOfSelected.indexOf(stateName); 
+                        if (i===0)
+                        {arrayOfSelected=[]}
+                        else
+                        {arrayOfSelected.splice(i,i);};
+                    };
+                    console.log(arrayOfSelected);
+
                     svg.selectAll("rect")
                         .style("fill", d => myColor(countByState.get(d.state)));
-                    svg.selectAll("rect")
-                        .filter(d => d.state !== stateName)
+
+                    if (!arrayOfSelected.length) //empty array
+                    {
+                        svg.selectAll("rect").attr('opacity', '100%');
+                        d3.selectAll('.unit').attr('opacity', '100%');
+                    }else{
+                        svg.selectAll("rect")
+                        .filter(d => arrayOfSelected.includes(d.state))
+                        .attr('opacity', '100%')
+                        .attr('fill', d => myColor(countByState.get(d.state)));
+
+                        svg.selectAll("rect")
+                        .filter(d => !arrayOfSelected.includes(d.state))
                         .attr('opacity', '30%')
                         .attr('fill', d => myColor(countByState.get(d.state)));
 
-                    d3.selectAll('.unit').filter((d2) => d !== d2).attr('opacity', '30%');
+                        d3.selectAll('.unit').filter((d2) => arrayOfSelected.includes(d2)).attr('opacity', '100%');
+                        d3.selectAll('.unit').filter((d2) => !arrayOfSelected.includes(d2)).attr('opacity', '30%'); //d !== d2
+                    };
 
                     tooltipState.transition()
                         .duration(30)
@@ -549,15 +595,16 @@
                             return myColor(countByState.get(fipsToStateCode[d.properties.fips.slice(2)]));
                         })
                         .on("click", (d) => {
-                            if (stateSelected) {
-                                unselectState(d);
-                            } else {
-                                selectState(d);
-                            }
+                            // if (stateSelected) {
+                            //     unselectState(d);
+                            // } else {
+                            //     selectState(d);
+                            // }
+                            selectState(d);
                         })
-                        .on("mouseout", unselectState);
+                        // .on("mouseout", unselectState);
                     })
-                    .draw(d3.select('#mappppp').datum(mapData)); //bug??
+                    .draw(d3.select('#mappppp').datum(mapData)); 
                 });
         }
 
