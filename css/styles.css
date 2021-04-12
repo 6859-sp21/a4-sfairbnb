@@ -66,10 +66,14 @@ body {
 } 
 
 /* scroller*/
+#graphic{
+  height: 1700px; 
+  margin-bottom: 30px;
+}
+
  #sections {
 position: relative;
 display: inline-block;
-
 width: 250px;
 top: -200px;
 z-index: 90;
