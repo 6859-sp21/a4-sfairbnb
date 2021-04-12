@@ -63,7 +63,8 @@
       // create svg and give it a width and height
       svg = d3.select(this).append('svg')
             .attr('width', w + margin.left + margin.right)
-            .attr('height', h + margin.top + margin.bottom);
+            .attr('height', h + margin.top + margin.bottom)
+            .attr('id', 'scrollsvg');
 
       svg.append('g');
       g = svg.select('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
@@ -465,7 +466,8 @@
       // create svg and give it a width and height
       svg = d3.select(this).append('svg')
             .attr('width', 400)
-            .attr('height',50);
+            .attr('height',50)
+            .attr('id','legendsvg');
 
       // // perform some preprocessing on raw data
       // var gunData = getGun(rawData);
@@ -664,13 +666,17 @@
  */
 function display(data) {
   //create data 
-  const year = 2019;
+  var year = document.getElementById("year-filter").value;
+  // console.log(year);
   var gunData = getGun(data);
   var ageData = getAge(data);
   var flightData = getFlight(data);
   // create a new plot and
   // display it
+  d3.select('#scrollsvg').remove();
+  d3.select('#legendsvg').remove();
   var plot = scrollVis();
+
   d3.select('#vis')
     .datum(data)
     .call(plot);
@@ -730,6 +736,6 @@ function display(data) {
 
 // d3.csv('data/death-by-police.csv', display);
 // load data and display
-d3.csv('data/death-by-police.csv').then(function (data){
-  display(data);
-});
+// d3.csv('data/death-by-police.csv').then(function (data){
+//   display(data);
+// });

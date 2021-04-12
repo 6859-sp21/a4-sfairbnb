@@ -24,6 +24,8 @@
     crossorigin="anonymous"></script>
     <script src="./index.js"></script>
     <script src="./libraries/color-legend.js"></script>
+    <script src="libraries/scroller.js"></script>
+    <script src="libraries/sections.js"></script>
 </head>
 
 <body>
@@ -98,19 +100,7 @@
     <!-- Details -->
     <section id="section3" class="cd-section nav-section">
         <div class="container">
-<!--            <div class="scroll-demo" style="margin-top: 100px;">
-                <div style="text-align: left;" >>> Gun Involved </div>
-                <div class="GL" style="padding-right: 0px" id="gl" ></div>
-                <div class="Gun" style="padding-right: 0px" id="gun" ></div><br>
-                <div style="text-align: left" >>> Age Distribution</div>
-                <div class="AL" style="padding-right: 0px" id="al" ></div>
-                <div class="Age" style="padding-right: 0px" id="age"></div><br>
-                <div style="text-align: left" >>> Flight Mode</div>
-                <div class="FL" style="padding-right: 0px" id="fl" ></div>
-                <div class="FlightMode" style="padding-right: 0px" id="flight"></div>
-            </div> -->
             <div id="storyTitle">Here is the beginning of the story >> </div>
-
         	<div id='graphic'>
                 <div id='vislegend'>
                 </div>
@@ -147,6 +137,7 @@
             document.getElementById("year-selected").innerHTML = year;
             console.log(e.target.value);
             render();
+            scroll_display();
         });
 
         const stateCodeToFips =
@@ -218,42 +209,14 @@
         .scale(900)
         .legend(false);
 
-        // // Create the gunsvg
-        // var gunsvg = d3.select("#gun").append('svg')
-        //     .attr('class', 'gunchart')
-        //     .attr('width', w + margin.left + margin.right)
-        //     .attr('height', h + margin.top + margin.bottom)
-        // var gunchart = gunsvg.append('g')
-        //     .attr('transform', `translate(${margin.left}, ${margin.top})`)
-        
-        // var glsvg = d3.select("#gl").append("svg")
-        // .attr('width', 400)
-        // .attr('height', 50);
-
-        // //age
-        // var age_svg = d3.select("#age").append('svg')
-        // .attr('class', 'gunchart')
-        // .attr('width', w + margin.left + margin.right)
-        // .attr('height', h + margin.top + margin.bottom)
-        // var agechart = age_svg.append('g')
-        // .attr('transform', `translate(${margin.left}, ${margin.top})`)
-
-        // var alsvg = d3.select("#al").append("svg")
-        // .attr('width', 400)
-        // .attr('height', 50);
-
-        // //flight
-        // var flight_svg = d3.select("#flight").append('svg')
-        // .attr('class', 'gunchart')
-        // .attr('width', w + margin.left + margin.right)
-        // .attr('height', h + margin.top + margin.bottom)
-        // var flightchart = flight_svg.append('g')
-        // .attr('transform', `translate(${margin.left}, ${margin.top})`)
-
-        // var flsvg = d3.select("#fl").append("svg")
-        // .attr('width', 400)
-        // .attr('height', 50);
-
+        /*
+         * Function of the scrollytelling 
+         */
+        function scroll_display(){
+            d3.csv('data/death-by-police.csv').then(function (data){
+                 display(data);
+             });
+        }
 
 
         /**
@@ -297,190 +260,6 @@
                 .transition().delay(function (d, i) { return .9 * i; })
                 .attr("class", (d) => { return d.state; });
 
-
-                // // gunchart
-                // let gunData = raw_data.filter(d=>d.date.substring(0,4) == year);
-                // gunData.map(d => d.armed === '' ? d.armed = 'Unknown': d.armed);
-                // gunData.map(d => d.armed === 'gun' ? d.armed : d.armed = 'Notgun');
-
-                // gunData.sort((a, b) => d3.descending(a.armed, b.armed));
-
-                // // Remove old squares
-                // gunchart.selectAll('rect').remove();
-
-                // // Append new squares
-                // const gunsquares = gunchart.selectAll('rect')
-                //     .data(gunData, function (d) { return d.name; })
-
-                // // Build the grid chart
-                // gunsquares.enter().append('rect')
-                //     .attr('x', (d, i) => {
-                //         const n = i % numPerRow;
-                //         return scale(n);
-                //     })
-                //     .attr('y', (d, i) => {
-                //         const n = Math.floor(i / numPerRow);
-                //         return scale(n);
-                //     })
-                //     .attr('fill', d => d.armed == 'gun' ? Fourcolor("0") : 'var(--grey1)')
-                //     .attr('ry', 10)
-                //     .attr('rx', 10)
-                //     .attr('width', squareSize)
-                //     .attr('height', squareSize)
-                //     .attr("class", d => d.armed);
-                // // legend
-                // var glkeys = ["Gun Involved","Gun Not Involved"];
-
-                // glsvg.selectAll("mydots")
-                //     .data(glkeys)
-                //     .enter()
-                //     .append("circle")
-                //     .attr("cx", function(d,i){ return 50 + i*150})
-                //     .attr("cy", 25) // 100 is where the first dot appears. 25 is the distance between dots
-                //     .attr("r", 5)
-                //     .style("fill", function(d){ return d === 'Gun Involved' ? Fourcolor("0") : 'var(--grey1)';})
-
-
-                // glsvg.selectAll("mylabels")
-                //       .data(glkeys)
-                //       .enter()
-                //       .append("text")
-                //         .attr("x", function(d,i){ return 70 + i*150})
-                //         .attr("y", 25)
-                //         .style("fill", function(d){ return d === 'Gun Involved' ? Fourcolor("0") : 'var(--grey1)';})
-                //         .text(function(d){ return d})
-                //         .attr("text-anchor", "left")
-                //         .style("alignment-baseline", "middle")
-
-
-                // //agechart
-                // let ageData = raw_data.filter(d => d.date.substring(0,4) == year);
-                // ageData.map(d => d.age === '' ? d.age ='Unknown': d.age);
-                // ageData.map(d => +d.age < 10 ? d.age ='06': d.age);
-                // ageData.sort((a, b) => d3.ascending(a.age, b.age)); 
-                // // Remove old squares
-                // agechart.selectAll('rect').remove();
-
-                // // Append new squares
-                // const agesquares = agechart.selectAll('rect')
-                //     .data(ageData, function (d) { return d.id; })
-
-                // // Build the grid chart
-                // agesquares.enter().append('rect')
-                // .attr('x', (d, i) => {
-                //     const n = i % numPerRow;
-                //     return scale(n);
-                // })
-                // .attr('y', (d, i) => {
-                //     const n = Math.floor(i / numPerRow);
-                //     return scale(n);
-                // })
-                // .attr('fill', function (d) {
-                //     if (d.age == 'Unknown') {return Fourcolor("unknown"); }
-                //     else if  (d.age > 40) {return Fourcolor("40");}
-                //     else if (d.age >20)  {return Fourcolor("20");}
-                //     else {return Fourcolor("0");}   
-                // })
-                // .attr('ry', 10)
-                // .attr('rx', 10)
-                // .attr('width', squareSize)
-                // .attr('height', squareSize)
-                // .attr("class", d => d.age);
-                // // legend	
-                // var alkeys = ["Unknown",">40" ,"20-40",'<20'];
-
-                // alsvg.selectAll("mydots")
-                //     .data(alkeys)
-                //     .enter()
-                //     .append("circle")
-                //     .attr("cx", function(d,i){ return 10 + i*100})
-                //     .attr("cy", 25) // 100 is where the first dot appears. 25 is the distance between dots
-                //     .attr("r", 5)
-                //     .style("fill", function (d) {
-                //     if (d == 'Unknown') {return Fourcolor("unknown"); }
-                //     else if  (d == '>40') {return Fourcolor("40");}
-                //     else if (d == '20-40')  {return Fourcolor("20");}
-                //     else {return Fourcolor("0");}   
-                // });
-
-
-                // alsvg.selectAll("mylabels")
-                //       .data(alkeys)
-                //       .enter()
-                //       .append("text")
-                //         .attr("x", function(d,i){ return 20 + i*100})
-                //         .attr("y", 25)
-                //         .style("fill", function (d) {
-                //             if (d == 'Unknown') {return Fourcolor("unknown"); }
-                //             else if  (d == '>40') {return Fourcolor("40");}
-                //             else if (d == '20-40')  {return Fourcolor("20");}
-                //             else {return Fourcolor("0");}
-                //             })  
-                //         .text(function(d){ return d})
-                //         .attr("text-anchor", "left")
-                //         .style("alignment-baseline", "middle");
-
-                
-
-                // //flightchart
-                // let flightData = raw_data.filter(d => d.date.substring(0,4) == year );
-                // flightData.map(d => d.flee === "Other" ? d.flee ='Unknown': d.flee);
-                // flightData.map(d => d.flee === "" ? d.flee ='Unknown': d.flee);
-                // let countByflee = d3.rollup(flightData, v => v.length, d => d.flee); //count of each state
-                // flightData.sort((a, b) => d3.descending(countByflee.get(a.flee), countByflee.get(b.flee))); 
-                
-                // //Remove old squares
-                // flightchart.selectAll('rect').remove();
-                
-                // // Append new squares
-                // const fsquares = flightchart.selectAll('rect')
-                // .data(flightData, function (d) { return d.name; })
-                
-                // // Build the grid chart
-                // fsquares.enter().append('rect')
-                // .attr('x', (d, i) => {
-                //     const n = i % numPerRow;
-                //     return scale(n);
-                // })
-                // .attr('y', (d, i) => {
-                //     const n = Math.floor(i / numPerRow);
-                //     return scale(n);
-                // })
-                // .attr('fill',function (d) { return Ordinalcolor(d.flee);} )
-                // .attr('ry', 10)
-                // .attr('rx', 10)
-                // .attr('width', squareSize)
-                // .attr('height', squareSize);
-
-                // //legend
-                // var flkeys = d3.set(flightData.map(function(d) { return d.flee; })).values();
-
-                // flsvg.selectAll("mydots")
-                //     .data(flkeys)
-                //     .enter()
-                //     .append("circle")
-                //     .attr("cx", function(d,i){ return 10 + i*100})
-                //     .attr("cy", 25) // 100 is where the first dot appears. 25 is the distance between dots
-                //     .attr("r", 5)
-                //     .style("fill", function (d) {return Ordinalcolor(d);}   
-                // );
-
-
-                // flsvg.selectAll("mylabels")
-                //       .data(flkeys)
-                //       .enter()
-                //       .append("text")
-                //         .attr("x", function(d,i){ return 20 + i*100})
-                //         .attr("y", 25)
-                //         .style("fill", function (d) {return Ordinalcolor(d)})  
-                //         .text(function(d){ 
-                //             if (d == 'Not fleeing') {return "Not fleeing"; }
-                //             else if  (d == 'Unknown') {return "Unknown";}
-                //             else if (d == 'Car') {return "By car"}
-                //             else {return "By foot";}})
-                //         .style("font-size", "12px")
-                //         .attr("text-anchor", "left")
-                //         .style("alignment-baseline", "middle");
 
 
                 function handleMouseOver(d) {
@@ -569,10 +348,10 @@
         }
 
         render();
+        scroll_display();
         
     </script>
-    <script src="libraries/scroller.js"></script>
-	<script src="libraries/sections.js"></script>
+	
     <script src="libraries/popper.min.js"></script>
     <!-- AOS must be included last -->
     <script src="libraries/aos.js"></script>
