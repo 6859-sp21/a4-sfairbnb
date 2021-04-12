@@ -17,7 +17,7 @@ Furthermore, we discover some meaningful perspectives about the data. For exampl
 
 The main responsibility is divided as following, but everyone is responsible for crossing checking and updating each other's section when there are cross-references and interactions between different sections.
 * Jiahui Tang: Geomap and Interaction between Dots, Map, Sliding Bar
-* Rui Wang: UI/UX Design, Matrix Chart, Sliding Bar, Navigation Dots, Cover Page, Footnote
+* Rui Wang: UI/UX Design, Matrix Chart, Sliding Bar, Navigation Dots, Cover Page, Footnote, Scroller
 * Silin Zou: Scrolling Analysis, EDA charts, and Interaction between EDA and Sliding Bar
 
 Roughly we spent around 60 hours in total developing our application.
@@ -26,7 +26,18 @@ The interaction functionalities with event listeners and updating graphs with ea
 In terms of other aspects, interaction design is the most time-consuming part.
 
 # Acknowledgement
+Dataset:
+* Police Shootings Dataset: https://www.kaggle.com/mrmorj/data-police-shootings
+* Police Violence & Racial Equity Dataset: https://www.kaggle.com/jpmiller/police-violence-in-the-us
 
-Scrollytelling: 
-https://vallandingham.me/scroller.html
-https://medium.com/@bryony_17728/titanic-d3-scrolling-story-eaed1b6f5766
+Analysis:
+* Understanding the Extent of Police Abuse in the United States of America: https://www.kaggle.com/thedatabeast/understanding-the-extent-of-police-abuse-in-the-us?select=deaths_arrests_race.csv
+
+JS: 
+* Scroller:https://vallandingham.me/scroller.html
+* Scroller: https://medium.com/@bryony_17728/titanic-d3-scrolling-story-eaed1b6f5766
+* AOS: https://github.com/michalsnik/aos
+* Nav Bar: https://codyhouse.co/gem/vertical-fixed-navigation-2
+
+A4 Video:
+* "https://www.youtube.com/watch?v=1ttZ7L2pWNo"
