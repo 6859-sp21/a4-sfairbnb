@@ -76,7 +76,7 @@ padding-bottom: 100px;
 }
 
 .step {
-margin-bottom: 200px;
+margin-bottom: 150px;
 width: 350px; 
 height:200px;
 
@@ -86,18 +86,19 @@ height:200px;
 #vis {
 display: inline-block;
 position: sticky;
-top : 200px;
+top : 20%;
 z-index: 1;
 margin-left: 650px;
 right: 60px;
 opacity: 1.0
 } 
 .title{
+color: var(--grey1);
 font-size: 16px;
 font-weight: bold;
 margin-bottom: 10px;
 }
-#vislegend {
+/* #vislegend {
 display: inline-block;
 position: sticky;
 top : 150px;
@@ -105,7 +106,7 @@ z-index: 1;
 margin-left: 640px;
 right: 60px;
 opacity: 1.0
-} 
+}  */
 #storyTitle{
   margin-top: 50px;
   font-size: 15px; 
