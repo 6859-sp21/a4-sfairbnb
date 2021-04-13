@@ -1,3 +1,12 @@
+# Team Member
+* Jiahui Tang
+* Rui Wang
+* Silin Zou
+
+# Data Source
+[Data Police shootings](https://www.kaggle.com/mrmorj/data-police-shootings) and [Police Violence & Racial Equity Dataset](https://www.kaggle.com/jpmiller/police-violence-in-the-us) retrieved from Kaggle, which is derived from database of every fatal shooting in the United States by a police officer. 
+
+
 # Decision Design Rationale
 
 Policing is a difficult job, but it’s also something that provides too much power into the hands of a few individuals, and it becomes difficult to hold people with authority accountable for their actions. According to the Washington Post, Police officers in the U.S. shoot and kill about 1,000 people each year.
@@ -27,17 +36,18 @@ In terms of other aspects, interaction design is the most time-consuming part.
 
 # Acknowledgement
 Dataset:
-* Police Shootings Dataset: https://www.kaggle.com/mrmorj/data-police-shootings
-* Police Violence & Racial Equity Dataset: https://www.kaggle.com/jpmiller/police-violence-in-the-us
+* [Police Shootings Dataset](https://www.kaggle.com/mrmorj/data-police-shootings)
+* [Police Violence & Racial Equity Dataset](https://www.kaggle.com/jpmiller/police-violence-in-the-us)
 
 Analysis:
-* Understanding the Extent of Police Abuse in the United States of America: https://www.kaggle.com/thedatabeast/understanding-the-extent-of-police-abuse-in-the-us?select=deaths_arrests_race.csv
+* [Understanding the Extent of Police Abuse in the United States of America](https://www.kaggle.com/thedatabeast/understanding-the-extent-of-police-abuse-in-the-us?select=deaths_arrests_race.csv)
 
 JS: 
-* Scroller:https://vallandingham.me/scroller.html
-* Scroller: https://medium.com/@bryony_17728/titanic-d3-scrolling-story-eaed1b6f5766
-* AOS: https://github.com/michalsnik/aos
-* Nav Bar: https://codyhouse.co/gem/vertical-fixed-navigation-2
+* [Scroller](https://vallandingham.me/scroller.html)
+* [Scroller](https://medium.com/@bryony_17728/titanic-d3-scrolling-story-eaed1b6f5766)
+* [AOS](https://github.com/michalsnik/aos)
+* [Nav Bar](https://codyhouse.co/gem/vertical-fixed-navigation-2)
+* [Choropleth Map: US States](https://d3-geomap.github.io/map/choropleth/us-states/)
 
 A4 Video:
-* "https://www.youtube.com/watch?v=1ttZ7L2pWNo"
+* [Youtube Link](https://www.youtube.com/watch?v=1ttZ7L2pWNo)
