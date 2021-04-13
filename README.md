@@ -1,7 +1,3 @@
-# Data Source
-[Data Police shootings](https://www.kaggle.com/mrmorj/data-police-shootings) and [Police Violence & Racial Equity Dataset](https://www.kaggle.com/jpmiller/police-violence-in-the-us) retrieved from Kaggle, which is derived from database of every fatal shooting in the United States by a police officer. 
-
-
 # Decision Design Rationale
 
 Policing is a difficult job, but it’s also something that provides too much power into the hands of a few individuals, and it becomes difficult to hold people with authority accountable for their actions. According to the Washington Post, Police officers in the U.S. shoot and kill about 1,000 people each year.
@@ -31,9 +27,8 @@ The interaction functionalities with event listeners and updating graphs with ea
 In terms of other aspects, interaction design is the most time-consuming part.
 
 # Acknowledgement
-Dataset:
-* [Police Shootings Dataset](https://www.kaggle.com/mrmorj/data-police-shootings)
-* [Police Violence & Racial Equity Dataset](https://www.kaggle.com/jpmiller/police-violence-in-the-us)
+Data Source:
+[Data Police shootings](https://www.kaggle.com/mrmorj/data-police-shootings) and [Police Violence & Racial Equity Dataset](https://www.kaggle.com/jpmiller/police-violence-in-the-us) retrieved from Kaggle, which is derived from database of every fatal shooting in the United States by a police officer. 
 
 Analysis:
 * [Understanding the Extent of Police Abuse in the United States of America](https://www.kaggle.com/thedatabeast/understanding-the-extent-of-police-abuse-in-the-us?select=deaths_arrests_race.csv)
