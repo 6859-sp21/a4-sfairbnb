@@ -1,8 +1,3 @@
-# Team Member
-* Jiahui Tang
-* Rui Wang
-* Silin Zou
-
 # Data Source
 [Data Police shootings](https://www.kaggle.com/mrmorj/data-police-shootings) and [Police Violence & Racial Equity Dataset](https://www.kaggle.com/jpmiller/police-violence-in-the-us) retrieved from Kaggle, which is derived from database of every fatal shooting in the United States by a police officer. 
 
